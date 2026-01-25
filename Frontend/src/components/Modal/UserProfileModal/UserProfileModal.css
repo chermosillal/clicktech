@@ -1,0 +1,72 @@
+.userprofile-modal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+.userprofile-modal {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px 24px 24px 24px;
+  min-width: 320px;
+  max-width: 400px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.userprofile-modal h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.userprofile-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.userprofile-modal input {
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1em;
+}
+.userprofile-modal button[type="submit"] {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.userprofile-modal button[type="submit"]:hover {
+  background: #1251a3;
+}
+.userprofile-msg {
+  color: #43a047;
+  font-size: 1em;
+  margin-top: 10px;
+  text-align: center;
+}
+.userprofile-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.userprofile-close:hover {
+  color: #d32f2f;
+}

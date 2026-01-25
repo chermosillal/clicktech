@@ -1,0 +1,144 @@
+/* Zoom de imagen: ancho fijo en desktop, 360px en móvil */
+
+.detalleprod-zoom-backdrop img {
+  width: 600px;
+  max-width: 98vw;
+  max-height: 90vh;
+  box-shadow: 0 0 32px #000;
+  border-radius: 8px;
+  background: #fff;
+}
+
+@media (max-width: 500px) {
+  .detalleprod-zoom-backdrop img {
+    width: 360px;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 600px) {
+  .detalleprod-modal {
+    max-width: 450px;
+    width: 98vw;
+  }
+}
+/* Centrar título y precio */
+.detalleprod-title {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.detalleprod-precio {
+  text-align: center;
+}
+/* Contenedor de las flechas de navegación de imágenes */
+.detalleprod-img-controls {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.detalleprod-img-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5em;
+  color: #1976d2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.detalleprod-img-btn:hover {
+  background: #e3e3e3;
+}
+/* Limitar tamaño de la imagen dentro del modal */
+.detalleprod-img {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: 0 auto 16px auto;
+  object-fit: contain;
+}
+/* Este archivo fue movido a src/Componentes/Productos/DetalleProd/DetalleProd.css */
+/* Fondo oscuro que cubre toda la pantalla */
+.detalleprod-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal centrado */
+.detalleprod-modal {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  max-width: 460px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px 24px 24px 24px;
+  position: relative;
+  z-index: 1010;
+}
+
+.detalleprod-precio {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #1976d2;
+}
+.detalleprod-desc {
+  color: #555;
+  margin-bottom: 8px;
+}
+.detalleprod-categoria {
+  color: #888;
+  font-size: 0.95em;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.detalleprod-btns {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.detalleprod-addcart {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 8px;
+}
+.detalleprod-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2.2em;
+  color: #888;
+  cursor: pointer;
+  z-index: 1020;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.detalleprod-close:hover {
+  color: #1976d2;
+}

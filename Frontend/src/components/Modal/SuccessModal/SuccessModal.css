@@ -1,0 +1,12 @@
+/* Estilos para el modal de éxito de compra */
+.success-modal {
+  text-align: center;
+}
+.success-modal-msg {
+  margin: 18px 0;
+  font-size: 1.1em;
+}
+.success-modal-numero {
+  font-size: 1.5em;
+  color: #1976d2;
+}

@@ -1,3 +1,7 @@
+# Variables de entorno
+.env
+.env.*
+!.env.example
 # Logs
 logs
 *.log
@@ -23,6 +27,4 @@ dist-ssr
 *.sln
 *.sw?
 
-# Variables de entorno
-.env
 

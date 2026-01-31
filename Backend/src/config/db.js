@@ -7,6 +7,7 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
+  // Usa SSL solo si la variable DB_SSL está en 'true' (útil para Render)
   ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
 });
 

@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import BASE_URL from '../../config/baseUrl';
 import "./Register.css";
 // import { addUsuario, loginUsuario, decodeToken } from "../../utils/usuario";
 
@@ -53,7 +54,7 @@ export default function Register({ onRegister, onClose, onShowLogin }) {
     }
     try {
       // Registro en backend
-      const res = await fetch("http://localhost:3001/api/auth/register", {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, rut, email, password, direccion })

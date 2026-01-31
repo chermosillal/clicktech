@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import BASE_URL from './config/baseUrl';
 // import productosData from './utils/productos';
 // import { usuarios } from './utils/usuario';
 import Header from './components/Header/Header';
@@ -94,7 +95,7 @@ function App() {
 
   useEffect(() => {
     const isAdmin = usuario && usuario.role === 'admin';
-    const url = isAdmin ? 'http://localhost:3001/api/products?admin=1' : 'http://localhost:3001/api/products';
+    const url = isAdmin ? `${BASE_URL}/products?admin=1` : `${BASE_URL}/products`;
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -130,7 +131,7 @@ function App() {
               onShowProfile={async () => {
                 if (usuario && usuario.token) {
                   try {
-                    const res = await fetch('http://localhost:3001/api/users/me', {
+                    const res = await fetch(`${BASE_URL}/users/me`, {
                       headers: { 'Authorization': `Bearer ${usuario.token}` }
                     });
                     if (res.ok) {
@@ -146,7 +147,7 @@ function App() {
               onAddProd={() => { if (usuario?.role === 'admin') setShowAddProd(true); }}
               recargarProductos={async () => {
                 const isAdmin = usuario && usuario.role === 'admin';
-                const url = isAdmin ? 'http://localhost:3001/api/products?admin=1' : 'http://localhost:3001/api/products';
+                const url = isAdmin ? `${BASE_URL}/products?admin=1` : `${BASE_URL}/products`;
                 const res = await fetch(url);
                 const data = await res.json();
                 setProductos(data);
@@ -186,7 +187,7 @@ function App() {
                 onClose={() => setShowAddProd(false)}
                 onAdd={() => {
                   // Recargar productos tras agregar
-                  fetch('http://localhost:3001/api/products')
+                  fetch(`${BASE_URL}/products`)
                     .then(res => res.json())
                     .then(data => {
                       setProductos(data);
@@ -232,7 +233,7 @@ function App() {
                   try {
                     const token = usuario?.token;
                     const items = cart.map(item => ({ product_id: item.id, cantidad: item.cantidad }));
-                    const res = await fetch('http://localhost:3001/api/orders', {
+                    const res = await fetch(`${BASE_URL}/orders`, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',

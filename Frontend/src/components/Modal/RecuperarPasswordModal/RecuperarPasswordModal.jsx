@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from '../../../config/baseUrl';
 import "./RecuperarPasswordModal.css";
 
 export default function RecuperarPasswordModal({ onClose, onShowLogin }) {
@@ -19,7 +20,7 @@ export default function RecuperarPasswordModal({ onClose, onShowLogin }) {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3001/api/auth/reset-password", {
+      const res = await fetch(`${BASE_URL}/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })

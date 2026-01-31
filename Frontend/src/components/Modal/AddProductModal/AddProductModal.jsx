@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from '../../../config/baseUrl';
 import "./AddProductModal.css";
 
 export default function AddProductModal({ onClose, onAdd, token }) {
@@ -45,7 +46,7 @@ export default function AddProductModal({ onClose, onAdd, token }) {
     }
     const imagenesFiltradas = form.imagenes.filter(url => url.trim() !== "");
     try {
-      const res = await fetch("http://localhost:3001/api/products", {
+      const res = await fetch(`${BASE_URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

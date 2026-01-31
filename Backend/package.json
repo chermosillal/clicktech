@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "test-db": "node src/config/test-db-connection.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from '../../../config/baseUrl';
 import "./UserProfileModal.css";
 
 
@@ -27,7 +28,7 @@ export default function UserProfileModal({ user, onSave, onClose }) {
       }
     }
     try {
-      const res = await fetch('http://localhost:3001/api/users/me', {
+      const res = await fetch(`${BASE_URL}/users/me`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

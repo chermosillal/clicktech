@@ -1,6 +1,7 @@
 
 
 import React, { useState } from "react";
+import BASE_URL from '../../config/baseUrl';
 import "./Centro.css";
 import ProductCard from "../Productos/ProductCard/ProductCard";
 import DetalleProd from "../Modal/DetalleProd/DetalleProd";
@@ -62,7 +63,7 @@ export default function Centro({ productos = [], mensajeError = "", onAddToCart,
           onSave={async (form) => {
             // Lógica para actualizar producto en backend
             try {
-              await fetch(`http://localhost:3001/api/products/${modProd.id}`,
+              await fetch(`${BASE_URL}/products/${modProd.id}`,
                 {
                   method: 'PUT',
                   headers: {

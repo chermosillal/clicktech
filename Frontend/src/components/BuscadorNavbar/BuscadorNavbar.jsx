@@ -6,7 +6,8 @@ export default function BuscadorNavbar(props) {
     setBusqueda,
     filtros,
     setFiltros,
-    onBuscar
+    onBuscar,
+    mensajeError
   } = props;
   // Valor por defecto para filtros
   const filtrosSafe = filtros || {};
@@ -42,6 +43,7 @@ export default function BuscadorNavbar(props) {
         />
         <button className="search-btn" onClick={handleBuscar}>Buscar</button>
       </div>
+      {/* El mensaje de error solo se muestra en el centro/productos */}
       <div className="buscador-filtros">
         <label>
           <input

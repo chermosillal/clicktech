@@ -4,8 +4,8 @@ import BASE_URL from '../../config/baseUrl';
 import "./Login.css";
 // import { loginUsuario, decodeToken } from "../../utils/usuario";
 
-export default function Login({ onLogin, onClose, onShowRegister, onShowRecuperar }) {
-  const [email, setEmail] = useState("");
+export default function Login({ onLogin, onClose, onShowRegister, onShowRecuperar, email: emailProp }) {
+  const [email, setEmail] = useState(emailProp || "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -26,7 +26,13 @@ export default function Login({ onLogin, onClose, onShowRegister, onShowRecupera
         return;
       }
       const data = await res.json();
-      onLogin({ ...data.user, token: data.token });
+      console.log('RESPUESTA LOGIN:', data);
+      try {
+        onLogin({ ...data.user, token: data.token });
+      } catch (e) {
+        console.error('ERROR EN onLogin:', e);
+        setError('Error interno en el login');
+      }
     } catch {
       setError("Error de conexión con el servidor");
     }
@@ -43,12 +49,14 @@ export default function Login({ onLogin, onClose, onShowRegister, onShowRecupera
             value={email}
             onChange={e => setEmail(e.target.value)}
             autoFocus
+            autoComplete="username"
           />
           <input
             type="password"
             placeholder="Contraseña"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
           {error && <div className="login-error">{error}</div>}
           <button type="submit">Ingresar</button>

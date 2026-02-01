@@ -4,6 +4,7 @@ import BASE_URL from '../../config/baseUrl';
 import "./Register.css";
 // import { addUsuario, loginUsuario, decodeToken } from "../../utils/usuario";
 
+// Modal de registro de usuario.
 export default function Register({ onRegister, onClose, onShowLogin }) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -15,10 +16,12 @@ export default function Register({ onRegister, onClose, onShowLogin }) {
   const [registroOk, setRegistroOk] = useState(false);
 
   // Validación de email
+  // Valida el formato del email.
   function validarEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
   // Validación simple de RUT chileno (formato y dígito verificador)
+  // Valida el formato del RUT chileno.
   function validarRut(rut) {
     rut = rut.replace(/\./g, '').replace(/-/g, '');
     if (!/^\d{7,8}[0-9kK]$/.test(rut)) return false;
@@ -34,6 +37,7 @@ export default function Register({ onRegister, onClose, onShowLogin }) {
     return dv === dvEsperado;
   }
 
+  // Maneja el envío del formulario de registro.
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nombre || !rut || !email || !direccion || !password || !confirm) {
@@ -122,7 +126,7 @@ export default function Register({ onRegister, onClose, onShowLogin }) {
           <>
             <h2>¡Registro exitoso!</h2>
             <p>Tu cuenta ha sido creada correctamente.</p>
-            <button onClick={() => { setRegistroOk(false); onClose(); onShowLogin(); }}>Continuar</button>
+            <button onClick={() => { setRegistroOk(false); onClose(); onShowLogin({ email }); }}>Continuar</button>
           </>
         )}
       </div>

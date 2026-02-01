@@ -31,6 +31,8 @@ const login = async (req, res) => {
   try {
     const user = await userModel.findUserByEmail(email);
     if (!user) return res.status(401).json({ error: 'Credenciales inválidas' });
+    // DEBUG: Mostrar valores recibidos y hash de la base
+    console.log('Login intento:', email, password, user ? user.password : 'NO USER');
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(401).json({ error: 'Credenciales inválidas' });
     const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -38,13 +40,17 @@ const login = async (req, res) => {
       token,
       user: {
         id: user.id,
+        nombre: user.nombre,
+        rut: user.rut,
         email: user.email,
+        direccion: user.direccion,
         role: user.role,
         created_at: user.created_at
       }
     });
   } catch (err) {
-    res.status(500).json({ error: 'Error al iniciar sesión' });
+    console.error('ERROR EN LOGIN:', err);
+    res.status(500).json({ error: 'Error al iniciar sesión', detalle: err.message });
   }
 };
 

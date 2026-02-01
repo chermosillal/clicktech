@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CartContext from './CartContextDef';
 
+// Proveedor de contexto para el carrito. Permite que los componentes hijos accedan y modifiquen el carrito.
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    try {
+      const stored = localStorage.getItem('cart');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  // Agrega un producto al carrito. Si ya existe, suma la cantidad.
   const addToCart = (product) => {
     setCart((prev) => {
       // Si el producto ya está en el carrito, suma cantidad
@@ -17,6 +30,7 @@ export function CartProvider({ children }) {
     });
   };
 
+  // Elimina un producto del carrito por su id. Si hay más de uno, resta la cantidad.
   const removeFromCart = (id) => {
     setCart((prev) => {
       const found = prev.find((item) => item.id === id);
@@ -30,6 +44,7 @@ export function CartProvider({ children }) {
     });
   };
 
+  // Vacía el carrito completamente.
   const clearCart = () => setCart([]);
 
   return (

@@ -1,3 +1,19 @@
+/**
+ * api.test.js
+ *
+ * Pruebas automáticas para la API del backend de Clicktech.
+ *
+ * Este archivo utiliza Jest y Supertest para validar los endpoints principales:
+ *   - Registro y login de usuarios (auth)
+ *   - Listado de productos
+ *
+ * ¿Cómo ejecutarlo?
+ * - Ejecuta `npm test` o `npx jest` en la carpeta Backend.
+ * - Asegúrate de tener la base de datos y el backend configurados correctamente.
+ *
+ * Puedes agregar más tests para cubrir otros endpoints o casos de negocio.
+ */
+
 const request = require('supertest');
 const app = require('../src/app');
 const pool = require('../src/config/db');

@@ -3,13 +3,16 @@ import React, { useState } from "react";
 // import imagenes from "../../../utils/imagenes";
 import "./DetalleProd.css";
 
+// Modal que muestra el detalle de un producto.
 export default function DetalleProd({ producto, onClose, onAddToCart, isAdmin }) {
   const [imgIdx, setImgIdx] = useState(0);
   const [zoomImg, setZoomImg] = useState(null);
   if (!producto) return null;
   // Usar imágenes del producto (de la API)
   const imagenesArr = producto.images && producto.images.length > 0 ? producto.images : ["https://i.postimg.cc/HVBfy2YB/default.png"];
+  // Cambia a la imagen anterior del producto.
   const handlePrev = (e) => { e.stopPropagation(); setImgIdx(idx => (idx === 0 ? imagenesArr.length - 1 : idx - 1)); };
+  // Cambia a la imagen siguiente del producto.
   const handleNext = (e) => { e.stopPropagation(); setImgIdx(idx => (idx === imagenesArr.length - 1 ? 0 : idx + 1)); };
   return (
     <>

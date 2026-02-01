@@ -2,12 +2,14 @@ import React from "react";
 import "./CartModal.css";
 // import { getNextNumeroCompra } from "../../../utils/NumeroCompra";
 
-export default function CartModal({ cart, onClose, onAdd, onRemove, onDelete, onBuy, isLoggedIn, onLoginClick }) {
+// Modal del carrito de compras.
+export default function CartModal({ cart, onClose, onAdd, onRemove, onDelete, onBuy, isLoggedIn, onLoginClick, userRole }) {
 	const total = cart.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+	const isAdmin = userRole === 'admin';
 
 	// Manejar compra: mostrar número de orden y vaciar carrito
+	// Inicia el proceso de compra desde el carrito.
 	const handleBuy = () => {
-		// El número de orden lo genera el backend
 		if (typeof onBuy === 'function') {
 			onBuy();
 		}
@@ -27,18 +29,23 @@ export default function CartModal({ cart, onClose, onAdd, onRemove, onDelete, on
 									<span className="cart-nombre">{item.nombre}</span>
 									<span className="cart-precio">${item.precio.toLocaleString('es-CL')}</span>
 									<div className="cart-cantidad">
-										<button onClick={() => onRemove(item.id)}>-</button>
+										<button onClick={() => onRemove(item.id)} disabled={isAdmin}>-</button>
 										<span>{item.cantidad}</span>
-										<button onClick={() => onAdd(item.id)}>+</button>
+										<button onClick={() => onAdd(item.id)} disabled={isAdmin}>+</button>
 									</div>
-									<button className="cart-delete" title="Eliminar artículo" onClick={() => onDelete(item.id)}>&#10006;</button>
+									<button className="cart-delete" title="Eliminar artículo" onClick={() => onDelete(item.id)} disabled={isAdmin}>&#10006;</button>
 								</li>
 							))}
 						</ul>
 						<div className="cart-total">
 							<b>Total:</b> ${total.toLocaleString('es-CL')}
 						</div>
-						{!isLoggedIn && (
+						{isAdmin && (
+							<div className="cart-admin-msg">
+								Los administradores no pueden realizar compras.
+							</div>
+						)}
+						{!isLoggedIn && !isAdmin && (
 							<div className="cart-login-msg">
 								Debes iniciar sesión para comprar.
 								<button
@@ -47,11 +54,16 @@ export default function CartModal({ cart, onClose, onAdd, onRemove, onDelete, on
 										onClose();
 										setTimeout(() => { onLoginClick(); }, 200);
 									}}
-									// margin-left ahora en CSS
 								>Iniciar sesión</button>
 							</div>
 						)}
-						<button className={`cart-buy${!isLoggedIn ? ' cart-buy-disabled' : ''}`} onClick={handleBuy} disabled={!isLoggedIn}>Comprar</button>
+						<button
+							className={`cart-buy${(!isLoggedIn || isAdmin) ? ' cart-buy-disabled' : ''}`}
+							onClick={handleBuy}
+							disabled={!isLoggedIn || isAdmin}
+						>
+							Comprar
+						</button>
 					</>
 				)}
 				<button className="cart-close" onClick={onClose}>&times;</button>

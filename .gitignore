@@ -1,0 +1,8 @@
+# Ignorar todos los archivos .md excepto README.md
+type: ignore
+
+# Ignora todos los archivos Markdown
+*.md
+
+# ¡Pero no ignores README.md!
+!README.md

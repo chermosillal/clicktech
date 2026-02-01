@@ -12,6 +12,21 @@ export default function UserProfileModal({ user, onSave, onClose }) {
     password: "",
     confirmPassword: ""
   });
+  // Refrescar datos al abrir el modal
+  React.useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const res = await fetch(`${BASE_URL}/users/me`, {
+          headers: { 'Authorization': `Bearer ${user.token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setForm(f => ({ ...f, ...data, password: '', confirmPassword: '' }));
+        }
+      } catch {}
+    }
+    fetchProfile();
+  }, [user.token]);
   const [msg, setMsg] = useState("");
 
   const handleChange = e => {
@@ -38,8 +53,10 @@ export default function UserProfileModal({ user, onSave, onClose }) {
       });
       if (!res.ok) throw new Error('Error al actualizar perfil');
       setMsg('Datos actualizados correctamente');
-      setTimeout(onClose, 1200);
-      onSave({ ...user, ...form });
+      setTimeout(() => {
+        onSave({ ...user, ...form });
+        onClose();
+      }, 1200);
       return;
     } catch {
       setMsg('Error al actualizar perfil');
@@ -76,7 +93,8 @@ export default function UserProfileModal({ user, onSave, onClose }) {
             type="email"
             name="email"
             value={form.email}
-            onChange={handleChange}
+            readOnly
+            disabled
             required
           />
           <label>Dirección:</label>

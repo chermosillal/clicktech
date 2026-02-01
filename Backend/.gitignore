@@ -36,3 +36,4 @@ jest-*
 
 # Misc
 *.swp
+*.md

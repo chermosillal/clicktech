@@ -212,5 +212,11 @@ Cada tipo de acceso muestra un menú adaptado a sus permisos, asegurando una exp
      - **Rutas:** En `src/routes/` se definen los endpoints de la API y se conectan con los controladores (por ejemplo, `userRoutes.js`, `productRoutes.js`).
    - Puedes comprobar la implementación MVC revisando la estructura de carpetas y observando cómo cada ruta importa su controlador y cada controlador utiliza los modelos para acceder a los datos.
 
+8. **Consideraciones sobre roles, perfil y restricciones**
+   Tras editar el perfil, la información del usuario se actualiza automáticamente en la UI y en el almacenamiento local, asegurando que siempre se muestre la versión más reciente.
+   El usuario admin no puede comprar ni abrir el carrito; estas restricciones están implementadas tanto en la interfaz como en la lógica de los componentes.
+   La UI y las opciones disponibles se adaptan dinámicamente según el rol del usuario (cliente o admin), garantizando una experiencia coherente y segura.
+
+
 ---
 Desarrollado por [Cesar Hermosilla Legent] - 2026

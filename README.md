@@ -1,6 +1,28 @@
+
+## 🚀 Ruta de Deploy Productivo
+
+**Sitio en producción:**
+https://clicktech-wine.vercel.app/
+
+> **Nota:** El fronteend está alojado en Vercel, pero el backend y la base de datos están alojados en render. Debido a las limitaciones del plan gratuito, los servicios pueden entrar en modo reposo cuando no hay actividad. Por ello, al acceder por primera vez o tras un periodo de inactividad, es posible que debas esperar unos segundos para que los endpoints respondan y se muestren los productos.
+
+
 # ClickTech
 
 ClickTeach es una plataforma de e-commerce y servicios digitales desarrollada con Node.js, PostgreSQL y React. Permite la gestión de productos físicos y digitales, compras, administración de usuarios y un panel de administración para el equipo.
+
+## Consideraciones del desarrollo
+
+Este desarrollo surge de la inquietud de crear un e-commerce propio, sin depender de plantillas ni estándares predefinidos, trabajando todo el código desde cero. El objetivo principal fue poner en práctica lo aprendido y, al mismo tiempo, lograr la mayor personalización posible en cada aspecto de la plataforma.
+
+- No se utilizó ninguna librería de estilos como Bootstrap o Tailwind; todo el diseño se realizó con CSS puro (flex, grid, @media).
+- El diseño es completamente responsivo, siguiendo la filosofía mobile first.
+- No se implementaron rutas (routes), ya que toda la navegación se gestiona mediante modales. La idea es que la página principal permanezca siempre visible. En una segunda etapa, se agregarán rutas para crear secciones como seguimiento de compras, espacios públicos (quiénes somos, cómo funcionamos, ubicaciones, etc.).
+- La administración de productos está integrada en el mismo frontend; sin embargo, la idea para una próxima fase es migrar la administración a un frontend separado, permitiendo así ambientes diferenciados para clientes y administradores, y facilitando la gestión de compras, seguimiento de pedidos, distribución, stock y proveedores.
+
+## Usuarios de prueba
+- Cliente: `cliente@demo.com` / `123`
+- Admin: `admin@demo.com` / `123`
 
 ## Características principales
 - Catálogo de productos físicos y digitales
@@ -100,15 +122,7 @@ npm install
    npm run dev
    ```
 
-## Usuarios de prueba
-- Cliente: `cliente@demo.com` / `123`
-- Admin: `admin@demo.com` / `123`
 
-## Notas
-- El backend corre por defecto en `http://localhost:3001`
-- El frontend corre por defecto en `http://localhost:5173`
-- El campo `disponible` permite ocultar productos del ecommerce sin eliminarlos.
-- Las imágenes y PDFs de ficha técnica actualmente se referencian por URL.
 
 ## Pendiente / Roadmap
 - Integración de pasarela de pago

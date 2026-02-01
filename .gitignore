@@ -6,3 +6,6 @@ type: ignore
 
 # ¡Pero no ignores README.md!
 !README.md
+
+# Ignorar la carpeta documentacion
+documentacion/

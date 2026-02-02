@@ -35,7 +35,7 @@ export default function AppContent({ usuario, setUsuario }) {
   // Handler para confirmar compra y mostrar número de orden
   async function handleConfirmCompra({ pago, envio }) {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/orders`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ export default function AppContent({ usuario, setUsuario }) {
       });
       if (!res.ok) throw new Error('Error al crear la orden');
       const data = await res.json();
+      console.log('Respuesta backend orden:', data); // <-- LOG PARA DEPURAR
       openModal('success', { numeroOrden: data.numero_orden });
       clearCart();
     } catch (err) {

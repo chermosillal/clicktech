@@ -17,7 +17,7 @@ import CartContext from '../context/CartContextDef';
 
 export default function ModalManager(props) {
   const { modal, closeModal, extra, openModal } = useModal();
-  const { cart, addToCart, removeFromCart, clearCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart } = useContext(CartContext);
   // Puedes obtener usuario, cart, etc. desde contextos o props si es necesario
   // const { usuario, cart, ... } = useContext(UsuarioContext) etc.
 
@@ -31,7 +31,7 @@ export default function ModalManager(props) {
             if (item) addToCart(item);
           }}
           onRemove={removeFromCart}
-          onDelete={removeFromCart}
+          onDelete={deleteFromCart}
           onClose={closeModal}
           isLoggedIn={extra?.isLoggedIn}
           userRole={extra?.userRole}

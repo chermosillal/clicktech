@@ -4,7 +4,7 @@
 **Sitio en producción:**
 https://clicktech-wine.vercel.app/
 
-> **Nota:** El fronteend está alojado en Vercel, pero el backend y la base de datos están alojados en render. Debido a las limitaciones del plan gratuito, los servicios pueden entrar en modo reposo cuando no hay actividad. Por ello, al acceder por primera vez o tras un periodo de inactividad, es posible que debas esperar unos segundos para que los endpoints respondan y se muestren los productos.
+> **Nota:** El fronteend está alojado en Vercel, pero el backend y la base de datos están alojados en Render. Debido a las limitaciones del plan gratuito, los servicios pueden entrar en modo reposo cuando no hay actividad. Por ello, al acceder por primera vez o tras un periodo de inactividad, es posible que debas esperar unos segundos para que los endpoints respondan y se muestren los productos.
 
 
 # ClickTech

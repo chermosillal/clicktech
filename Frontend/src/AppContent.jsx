@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer';
 import ModalManager from './components/ModalManager';
 import { useContext } from 'react';
 import CartContext from './context/CartContextDef';
-//import ModalContext from './context/ModalContextDef';
+import BASE_URL from './config/baseUrl';
 import useProductos from './hooks/useProductos';
 import useModal from './hooks/useModal';
 
@@ -35,7 +35,7 @@ export default function AppContent({ usuario, setUsuario }) {
   // Handler para confirmar compra y mostrar número de orden
   async function handleConfirmCompra({ pago, envio }) {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/orders`, {
+      const res = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function AppContent({ usuario, setUsuario }) {
       console.log('Respuesta backend orden:', data); // <-- LOG PARA DEPURAR
       openModal('success', { numeroOrden: data.numero_orden });
       clearCart();
-    } catch (err) {
+    } catch {
       openModal('success', { mensaje: 'Error al procesar la compra' });
     }
   }

@@ -107,7 +107,7 @@ export default function AppContent({ usuario, setUsuario }) {
         recargarProductos={() => recargarProductos(usuario)}
       />
       <Footer />
-      <ModalManager onLogin={handleLogin} onProfileSave={setUsuario} />
+      <ModalManager onLogin={handleLogin} onProfileSave={setUsuario} handleConfirmCompra={handleConfirmCompra} />
     </div>
   );
 }

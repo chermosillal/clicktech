@@ -1,6 +1,9 @@
 // Este componente se encargará de mostrar y controlar todos los modales de la app.
 // Recibe los estados y handlers como props desde App.jsx
 import React, { useContext } from 'react';
+import useModal from '../hooks/useModal';
+import CartContext from '../context/CartContextDef';
+import AppContent from '../AppContent';
 import CartModal from './Modal/CartModal/CartModal';
 import CheckoutModal from './Modal/CheckoutModal/CheckoutModal';
 import SuccessModal from './Modal/SuccessModal/SuccessModal';
@@ -20,6 +23,12 @@ export default function ModalManager(props) {
   const { cart, addToCart, removeFromCart, deleteFromCart, clearCart } = useContext(CartContext);
   // Puedes obtener usuario, cart, etc. desde contextos o props si es necesario
   // const { usuario, cart, ... } = useContext(UsuarioContext) etc.
+
+  // Siempre usar el handler de compra principal si no viene en extra
+  let checkoutOnConfirm = extra?.onConfirm;
+  if (!checkoutOnConfirm && props.handleConfirmCompra) {
+    checkoutOnConfirm = props.handleConfirmCompra;
+  }
 
   switch (modal) {
     case 'cart':
@@ -59,7 +68,7 @@ export default function ModalManager(props) {
         />
       );
     case 'checkout':
-      return <CheckoutModal {...extra} onCancel={closeModal} onConfirm={extra?.onConfirm} />;
+      return <CheckoutModal {...extra} onCancel={closeModal} onConfirm={checkoutOnConfirm} />;
     case 'success':
       return <SuccessModal {...extra} onClose={closeModal} />;
     case 'login':

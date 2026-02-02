@@ -21,10 +21,13 @@ export default function ModalManager(props) {
   // Puedes obtener usuario, cart, etc. desde contextos o props si es necesario
   // const { usuario, cart, ... } = useContext(UsuarioContext) etc.
 
-  // Siempre usar el handler de compra principal si no viene en extra
+  // Siempre usar el handler de compra principal si no viene en extra o si el que viene no es el real
   let checkoutOnConfirm = extra?.onConfirm;
-  if (!checkoutOnConfirm && props.handleConfirmCompra) {
-    checkoutOnConfirm = props.handleConfirmCompra;
+  // Si el handler recibido no es el real, forzar el correcto
+  if (!checkoutOnConfirm || checkoutOnConfirm.toString().includes('openModal("success"')) {
+    if (props.handleConfirmCompra) {
+      checkoutOnConfirm = props.handleConfirmCompra;
+    }
   }
 
   switch (modal) {

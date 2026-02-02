@@ -85,7 +85,9 @@ export default function AppContent({ usuario, setUsuario }) {
           onAdd: (id) => {
             const item = cart.find(i => i.id === id);
             if (item) addToCart(item);
-          }
+          },
+          // Siempre pasar el handler real de compra por si se pierde en el flujo
+          onConfirm: handleConfirmCompra
         })}
       />
       <BuscadorNavbar

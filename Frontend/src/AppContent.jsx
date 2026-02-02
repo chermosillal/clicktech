@@ -30,7 +30,31 @@ export default function AppContent({ usuario, setUsuario }) {
     recargarProductos(usuario);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usuario]);
-  const { cart, addToCart, clearCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart } = useContext(CartContext);
+
+  // Handler para confirmar compra y mostrar número de orden
+  async function handleConfirmCompra({ pago, envio }) {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(usuario?.token ? { 'Authorization': `Bearer ${usuario.token}` } : {})
+        },
+        body: JSON.stringify({
+          items: cart.map(({ id, cantidad }) => ({ product_id: id, cantidad })),
+          pago,
+          envio
+        })
+      });
+      if (!res.ok) throw new Error('Error al crear la orden');
+      const data = await res.json();
+      openModal('success', { numeroOrden: data.numero_orden });
+      clearCart();
+    } catch (err) {
+      openModal('success', { mensaje: 'Error al procesar la compra' });
+    }
+  }
 
   return (
     <div className="app-container">
@@ -42,11 +66,14 @@ export default function AppContent({ usuario, setUsuario }) {
           userRole: usuario ? usuario.role : "",
           onLoginClick: () => openModal('login'),
           onBuy: () => openModal('checkout', {
-            onConfirm: () => {
-              openModal('success', { mensaje: '¡Compra realizada con éxito!' });
-              clearCart();
-            }
-          })
+            onConfirm: handleConfirmCompra
+          }),
+          onRemove: removeFromCart,
+          onDelete: deleteFromCart,
+          onAdd: (id) => {
+            const item = cart.find(i => i.id === id);
+            if (item) addToCart(item);
+          }
         })}
       />
       <BuscadorNavbar

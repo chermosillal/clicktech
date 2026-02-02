@@ -44,11 +44,16 @@ export function CartProvider({ children }) {
     });
   };
 
+  // Elimina completamente un producto del carrito (sin importar cantidad)
+  const deleteFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
   // Vacía el carrito completamente.
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, deleteFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

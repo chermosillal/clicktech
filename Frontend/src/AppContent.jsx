@@ -23,6 +23,7 @@ export default function AppContent({ usuario, setUsuario }) {
       if (window._loginFromCart && usuario) {
         openModal('cart', { isLoggedIn: true });
         window._loginFromCart = false;
+        // No abrir el checkout automáticamente, el usuario debe hacer clic en Comprar
       }
     }, [usuario, openModal]);
   const {

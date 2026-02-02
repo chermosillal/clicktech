@@ -40,6 +40,8 @@ export default function AppContent({ usuario, setUsuario }) {
   // Handler para confirmar compra y mostrar número de orden
   async function handleConfirmCompra({ pago, envio }) {
     try {
+      console.log('Usuario antes de comprar:', usuario);
+      console.log('Token usado:', usuario?.token);
       const res = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {

@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import "../CartModal/CartModal.css";
 
+
 export default function CheckoutModal({ onConfirm, onCancel, direccion }) {
   const [pago, setPago] = useState("");
   const [envio, setEnvio] = useState("");
   const [error, setError] = useState("");
 
+  // Log para depurar si el handler es válido
+  console.log('CheckoutModal render: onConfirm es función?', typeof onConfirm === 'function', onConfirm);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Submit checkout ejecutado');
     if (!pago || !envio) {
       setError("Debe seleccionar forma de pago y envío.");
       return;
     }
     setError("");
-    onConfirm({ pago, envio });
+    if (typeof onConfirm === 'function') {
+      onConfirm({ pago, envio });
+    } else {
+      console.error('onConfirm no es función en submit');
+    }
   };
 
   return (

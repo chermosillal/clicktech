@@ -1,9 +1,8 @@
 // Este componente se encargará de mostrar y controlar todos los modales de la app.
 // Recibe los estados y handlers como props desde App.jsx
-import React, { useContext } from 'react';
 import useModal from '../hooks/useModal';
 import CartContext from '../context/CartContextDef';
-import AppContent from '../AppContent';
+import React, { useContext } from 'react';
 import CartModal from './Modal/CartModal/CartModal';
 import CheckoutModal from './Modal/CheckoutModal/CheckoutModal';
 import SuccessModal from './Modal/SuccessModal/SuccessModal';
@@ -12,8 +11,6 @@ import RecuperarPasswordModal from './Modal/RecuperarPasswordModal/RecuperarPass
 import Register from './Register/Register';
 import UserProfileModal from './Modal/UserProfileModal/UserProfileModal';
 import AddProductModal from './Modal/AddProductModal/AddProductModal';
-import useModal from '../hooks/useModal';
-import CartContext from '../context/CartContextDef';
 
 // Aquí deberías obtener los datos globales necesarios (usuario, cart, etc.) desde contextos o props globales
 // Para este ejemplo, se asume que esos datos se obtienen de contextos o props superiores

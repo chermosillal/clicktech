@@ -42,24 +42,28 @@ export default function AppContent({ usuario, setUsuario }) {
     try {
       console.log('Usuario antes de comprar:', usuario);
       console.log('Token usado:', usuario?.token);
+      const ordenPayload = {
+        items: cart.map(({ id, cantidad }) => ({ product_id: id, cantidad })),
+        pago,
+        envio
+      };
+      console.log('Enviando orden al backend:', ordenPayload);
       const res = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           ...(usuario?.token ? { 'Authorization': `Bearer ${usuario.token}` } : {})
         },
-        body: JSON.stringify({
-          items: cart.map(({ id, cantidad }) => ({ product_id: id, cantidad })),
-          pago,
-          envio
-        })
+        body: JSON.stringify(ordenPayload)
       });
+      console.log('Respuesta fetch (raw):', res);
       if (!res.ok) throw new Error('Error al crear la orden');
       const data = await res.json();
-      console.log('Respuesta backend orden:', data); // <-- LOG PARA DEPURAR
+      console.log('Respuesta backend orden (json):', data); // <-- LOG PARA DEPURAR
       openModal('success', { numeroOrden: data.numero_orden });
       clearCart();
-    } catch {
+    } catch (e) {
+      console.error('Error en handleConfirmCompra:', e);
       openModal('success', { mensaje: 'Error al procesar la compra' });
     }
   }

@@ -4,13 +4,14 @@ import BuscadorNavbar from './components/BuscadorNavbar/BuscadorNavbar';
 import Centro from './components/Centro/Centro';
 import Footer from './components/Footer/Footer';
 import ModalManager from './components/ModalManager';
-
 import { useContext } from 'react';
 import CartContext from './context/CartContextDef';
+//import ModalContext from './context/ModalContextDef';
 import useProductos from './hooks/useProductos';
-import useModal from './context/useModal';
+import useModal from './hooks/useModal';
 
 export default function AppContent({ usuario, setUsuario }) {
+  //const { openModal, closeModal} = useContext(ModalContext);
   const { openModal, closeModal } = useModal();
   function handleLogin(user) {
     setUsuario(user);

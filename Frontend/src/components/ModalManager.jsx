@@ -9,7 +9,7 @@ import RecuperarPasswordModal from './Modal/RecuperarPasswordModal/RecuperarPass
 import Register from './Register/Register';
 import UserProfileModal from './Modal/UserProfileModal/UserProfileModal';
 import AddProductModal from './Modal/AddProductModal/AddProductModal';
-import useModal from '../context/useModal';
+import useModal from '../hooks/useModal';
 import CartContext from '../context/CartContextDef';
 
 // Aquí deberías obtener los datos globales necesarios (usuario, cart, etc.) desde contextos o props globales
@@ -41,7 +41,6 @@ export default function ModalManager(props) {
               extra.onLoginClick();
             } else {
               // fallback: abre login
-              const { openModal } = require('../context/useModal').default();
               openModal('login');
             }
           }}
@@ -93,6 +92,6 @@ export default function ModalManager(props) {
     case 'addProd':
       return <AddProductModal {...extra} onClose={closeModal} />;
     default:
-      return null;
+      return <></>; // No mostrar nada si no hay modal activo
   }
 }

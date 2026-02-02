@@ -7,7 +7,7 @@ export default function BuscadorNavbar(props) {
     filtros,
     setFiltros,
     onBuscar,
-    mensajeError
+    //mensajeError
   } = props;
   // Valor por defecto para filtros
   const filtrosSafe = filtros || {};

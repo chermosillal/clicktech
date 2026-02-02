@@ -5,7 +5,7 @@ import "./Register.css";
 // import { addUsuario, loginUsuario, decodeToken } from "../../utils/usuario";
 
 // Modal de registro de usuario.
-export default function Register({ onRegister, onClose, onShowLogin }) {
+export default function Register({ onClose, onShowLogin }) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [nombre, setNombre] = useState("");

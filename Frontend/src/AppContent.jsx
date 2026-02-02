@@ -113,6 +113,7 @@ export default function AppContent({ usuario, setUsuario }) {
         recargarProductos={() => recargarProductos(usuario)}
       />
       <Footer />
+      {console.log('AppContent: handleConfirmCompra es', handleConfirmCompra)}
       <ModalManager onLogin={handleLogin} onProfileSave={setUsuario} handleConfirmCompra={handleConfirmCompra} />
     </div>
   );

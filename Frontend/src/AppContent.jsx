@@ -40,14 +40,11 @@ export default function AppContent({ usuario, setUsuario }) {
   // Handler para confirmar compra y mostrar número de orden
   async function handleConfirmCompra({ pago, envio }) {
     try {
-      console.log('Usuario antes de comprar:', usuario);
-      console.log('Token usado:', usuario?.token);
       const ordenPayload = {
         items: cart.map(({ id, cantidad }) => ({ product_id: id, cantidad })),
         pago,
         envio
       };
-      console.log('Enviando orden al backend:', ordenPayload);
       const res = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
@@ -56,14 +53,11 @@ export default function AppContent({ usuario, setUsuario }) {
         },
         body: JSON.stringify(ordenPayload)
       });
-      console.log('Respuesta fetch (raw):', res);
       if (!res.ok) throw new Error('Error al crear la orden');
       const data = await res.json();
-      console.log('Respuesta backend orden (json):', data); // <-- LOG PARA DEPURAR
       openModal('success', { numeroOrden: data.numero_orden });
       clearCart();
-    } catch (e) {
-      console.error('Error en handleConfirmCompra:', e);
+    } catch {
       openModal('success', { mensaje: 'Error al procesar la compra' });
     }
   }
@@ -113,7 +107,7 @@ export default function AppContent({ usuario, setUsuario }) {
         recargarProductos={() => recargarProductos(usuario)}
       />
       <Footer />
-      {console.log('AppContent: handleConfirmCompra es', handleConfirmCompra)}
+      {/* Limpieza de logs de depuración */}
       <ModalManager onLogin={handleLogin} onProfileSave={setUsuario} handleConfirmCompra={handleConfirmCompra} />
     </div>
   );

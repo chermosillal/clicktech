@@ -8,25 +8,17 @@ export default function CheckoutModal({ onConfirm, onCancel, direccion }) {
   const [error, setError] = useState("");
 
   // Log para depurar si el handler es válido
-  console.log('CheckoutModal render: onConfirm es función?', typeof onConfirm === 'function', onConfirm);
+  //
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit checkout ejecutado');
     if (!pago || !envio) {
       setError("Debe seleccionar forma de pago y envío.");
       return;
     }
     setError("");
     if (typeof onConfirm === 'function') {
-      console.log('Llamando a onConfirm con:', { pago, envio }, 'onConfirm:', onConfirm.toString());
-      const result = onConfirm({ pago, envio });
-      // Si onConfirm es async, esperar el resultado
-      if (result && typeof result.then === 'function') {
-        result.then(r => console.log('onConfirm (async) resolvió:', r)).catch(e => console.error('onConfirm (async) error:', e));
-      }
-    } else {
-      console.error('onConfirm no es función en submit');
+      onConfirm({ pago, envio });
     }
   };
 

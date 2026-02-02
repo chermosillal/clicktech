@@ -16,11 +16,15 @@ export default function AppContent({ usuario, setUsuario }) {
   function handleLogin(user) {
     setUsuario(user);
     closeModal(); // Cierra el modal de login correctamente
-    if (window._loginFromCart) {
-      openModal('cart', { isLoggedIn: true });
-      window._loginFromCart = false;
-    }
+    // El flujo de abrir el modal del carrito se maneja en el useEffect de abajo
   }
+    // Si el login vino desde el carrito, abrir el modal del carrito solo cuando usuario esté actualizado
+    useEffect(() => {
+      if (window._loginFromCart && usuario) {
+        openModal('cart', { isLoggedIn: true });
+        window._loginFromCart = false;
+      }
+    }, [usuario, openModal]);
   const {
     busqueda, setBusqueda, filtros, setFiltros,
     productosFiltrados, mensajeError, handleBuscar, recargarProductos

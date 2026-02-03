@@ -55,7 +55,7 @@ export default function AddProductModal({ onClose, onAdd, token }) {
         body: JSON.stringify({
           nombre: form.nombre,
           descripcion: form.descripcion,
-          precio: form.precio,
+          precio: parseFloat(form.precio),
           marca: form.marca,
           incluye: form.incluye,
           garantia: form.garantia,

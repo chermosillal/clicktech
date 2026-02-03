@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BASE_URL from '../../../config/baseUrl';
 import "./AddProductModal.css";
 
-export default function AddProductModal({ onClose, onAdd, token }) {
+export default function AddProductModal({ onClose, onAdd, token, recargarProductos }) {
   const [form, setForm] = useState({
     nombre: "",
     descripcion: "",
@@ -72,6 +72,7 @@ export default function AddProductModal({ onClose, onAdd, token }) {
       });
       if (!res.ok) throw new Error("Error al agregar producto");
       setMsg("Producto agregado correctamente");
+      if (recargarProductos) recargarProductos();
       if (onAdd) onAdd();
       setTimeout(onClose, 1200);
     } catch {

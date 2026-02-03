@@ -103,7 +103,7 @@ export default function AppContent({ usuario, setUsuario }) {
         onLogoutClick={() => setUsuario(null)}
         onLoginClick={() => openModal('login')}
         onShowProfile={() => openModal('profile', { user: usuario })}
-        onAddProd={() => openModal('addProd', { token: usuario?.token })}
+        onAddProd={() => openModal('addProd', { token: usuario?.token, recargarProductos })}
         recargarProductos={() => recargarProductos(usuario)}
       />
       <Footer />
